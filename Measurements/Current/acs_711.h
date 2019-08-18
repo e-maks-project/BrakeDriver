@@ -14,6 +14,7 @@
 #define ACS_711_OUTPUT_ERROR  4.0f  //%
 #define ACS_711_OFFSET		  1.5f // I = 0 , V = 1,5V
 
+
 typedef struct{
 	uint32_t encoded;
 	float decoded;

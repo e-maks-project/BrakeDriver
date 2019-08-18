@@ -9,7 +9,7 @@
 
 //todo Lukas: do something with it
 extern uint32_t adc_raw_values[];
-uint32_t* adc_encoded_data = adc_raw_values;
+uint32_t* adc_encoded_data = &adc_raw_values[ADC_ACS_INDEX];
 current_measurement acs_data;
 
 current_measurement* get_current_ptr(void){

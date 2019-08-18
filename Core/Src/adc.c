@@ -21,17 +21,13 @@
 #include "adc.h"
 
 /* USER CODE BEGIN 0 */
-
+uint32_t adc_raw_values[NUMBER_OF_ADC_CHANNLES];
 /* USER CODE END 0 */
+
 
 ADC_HandleTypeDef hadc1;
 DMA_HandleTypeDef hdma_adc1;
 
-uint32_t adc_raw_values[NUMBER_OF_ADC_CHANNLES];
-
-uint32_t* get_raw_adc_data(void){
-	return adc_raw_values;
-}
 
 /* ADC1 init function */
 void MX_ADC1_Init(void)
@@ -56,6 +52,8 @@ void MX_ADC1_Init(void)
   sConfig.Channel = ADC_CHANNEL_1;
   sConfig.Rank = ADC_REGULAR_RANK_1;
   sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
+
+  HAL_ADC_Start_DMA(&hadc1,adc_raw_values, NUMBER_OF_ADC_CHANNLES);
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
   {
     Error_Handler();
@@ -75,10 +73,17 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* adcHandle)
     /* ADC1 clock enable */
     __HAL_RCC_ADC1_CLK_ENABLE();
   
+    __HAL_RCC_GPIOC_CLK_ENABLE();
     __HAL_RCC_GPIOA_CLK_ENABLE();
     /**ADC1 GPIO Configuration    
+    PC2     ------> ADC1_IN12
+    PC3     ------> ADC1_IN13
     PA1     ------> ADC1_IN1 
     */
+    GPIO_InitStruct.Pin = ADC_1_Pin|ADC_2_Pin;
+    GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+    HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
     GPIO_InitStruct.Pin = ACS_CURRENT_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
     HAL_GPIO_Init(ACS_CURRENT_GPIO_Port, &GPIO_InitStruct);
@@ -118,8 +123,12 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* adcHandle)
     __HAL_RCC_ADC1_CLK_DISABLE();
   
     /**ADC1 GPIO Configuration    
+    PC2     ------> ADC1_IN12
+    PC3     ------> ADC1_IN13
     PA1     ------> ADC1_IN1 
     */
+    HAL_GPIO_DeInit(GPIOC, ADC_1_Pin|ADC_2_Pin);
+
     HAL_GPIO_DeInit(ACS_CURRENT_GPIO_Port, ACS_CURRENT_Pin);
 
     /* ADC1 DMA DeInit */

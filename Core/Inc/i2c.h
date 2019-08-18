@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * File Name          : ADC.h
+  * File Name          : I2C.h
   * Description        : This file provides code for the configuration
-  *                      of the ADC instances.
+  *                      of the I2C instances.
   ******************************************************************************
   * @attention
   *
@@ -17,8 +17,8 @@
   ******************************************************************************
   */
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __adc_H
-#define __adc_H
+#ifndef __i2c_H
+#define __i2c_H
 #ifdef __cplusplus
  extern "C" {
 #endif
@@ -30,29 +30,22 @@
 
 /* USER CODE END Includes */
 
-extern ADC_HandleTypeDef hadc1;
+extern I2C_HandleTypeDef hi2c2;
 
 /* USER CODE BEGIN Private defines */
-/* to be updated during further development */
-#define NUMBER_OF_ADC_CHANNLES  3
-#define ADC_ACS_INDEX    	    0
-#define ADC_1_INDEX				1
-#define ADC_2_INDEX				2
 
-#define STM32_ADC_RESOLUTION  4096.0f
-#define STM32_ADC_REFERENCE_VOLTAGE 3.3f
 /* USER CODE END Private defines */
 
-void MX_ADC1_Init(void);
+void MX_I2C2_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-uint32_t* get_raw_adc_data(void);
+
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus
 }
 #endif
-#endif /*__ adc_H */
+#endif /*__ i2c_H */
 
 /**
   * @}

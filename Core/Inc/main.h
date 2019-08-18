@@ -58,10 +58,22 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define ADC_1_Pin GPIO_PIN_2
+#define ADC_1_GPIO_Port GPIOC
+#define ADC_2_Pin GPIO_PIN_3
+#define ADC_2_GPIO_Port GPIOC
 #define ACS_FAULT_Pin GPIO_PIN_0
 #define ACS_FAULT_GPIO_Port GPIOA
 #define ACS_CURRENT_Pin GPIO_PIN_1
 #define ACS_CURRENT_GPIO_Port GPIOA
+#define ENCODER_1_A_Pin GPIO_PIN_6
+#define ENCODER_1_A_GPIO_Port GPIOA
+#define ENCODER_1_B_Pin GPIO_PIN_7
+#define ENCODER_1_B_GPIO_Port GPIOA
+#define ENCODER_2_A_Pin GPIO_PIN_0
+#define ENCODER_2_A_GPIO_Port GPIOB
+#define ENCODER_2_B_Pin GPIO_PIN_1
+#define ENCODER_2_B_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 void hal_init(void);
 /* USER CODE END Private defines */

@@ -33,13 +33,17 @@
 extern ADC_HandleTypeDef hadc1;
 
 /* USER CODE BEGIN Private defines */
+/* to be updated during further development */
+#define NUMBER_OF_ADC_CHANNLES  1
 
+#define STM32_ADC_RESOLUTION  4096.0f
+#define STM32_ADC_REFERENCE_VOLTAGE 3.3f
 /* USER CODE END Private defines */
 
 void MX_ADC1_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-
+uint32_t* get_raw_adc_data(void);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

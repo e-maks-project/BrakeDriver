@@ -27,6 +27,12 @@
 ADC_HandleTypeDef hadc1;
 DMA_HandleTypeDef hdma_adc1;
 
+uint32_t adc_raw_values[NUMBER_OF_ADC_CHANNLES];
+
+uint32_t* get_raw_adc_data(void){
+	return adc_raw_values;
+}
+
 /* ADC1 init function */
 void MX_ADC1_Init(void)
 {

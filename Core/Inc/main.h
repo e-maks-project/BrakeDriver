@@ -63,7 +63,7 @@ void Error_Handler(void);
 #define ACS_CURRENT_Pin GPIO_PIN_1
 #define ACS_CURRENT_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
-
+void hal_init(void);
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

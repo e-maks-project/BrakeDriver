@@ -65,7 +65,7 @@ void SystemClock_Config(void);
   * @brief  The application entry point.
   * @retval int
   */
-int main(void)
+void hal_init(void)
 {
   /* USER CODE BEGIN 1 */
 
@@ -97,12 +97,7 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-    /* USER CODE END WHILE */
 
-    /* USER CODE BEGIN 3 */
-  }
   /* USER CODE END 3 */
 }
 

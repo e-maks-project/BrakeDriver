@@ -76,7 +76,11 @@ void Error_Handler(void);
 #define ENCODER_2_A_GPIO_Port GPIOB
 #define ENCODER_2_B_Pin GPIO_PIN_1
 #define ENCODER_2_B_GPIO_Port GPIOB
+
+
 /* USER CODE BEGIN Private defines */
+#define EXTI_LOW_LIMIT_SWITCH_PIN_INDEX  6
+#define EXTI_HIGH_LIMIT_SWITCH_PIN_INDEX 7
 void hal_init(void);
 /* USER CODE END Private defines */
 

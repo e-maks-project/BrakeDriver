@@ -112,7 +112,13 @@ void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 2 */
-
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
+	/*todo Lukas: handle both interrupts
+	 * this functon is called for every pin in stm32f1xx_it.h
+	 * hierarchy :
+	 * EXTI9_5_IRQHandler()->HAL_GPIO_EXTI_IRQHandler(pin)->HAL_GPIO_EXTI_Callback()( if statements)
+	 */
+}
 /* USER CODE END 2 */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

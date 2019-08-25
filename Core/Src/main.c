@@ -49,7 +49,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+uint32_t adc_raw_values[NUMBER_OF_ADC_CHANNLES];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -71,6 +71,10 @@ void hal_init(void){
 	MX_ADC1_Init();
 	MX_I2C2_Init();
 	MX_TIM3_Init();
+
+	// todo Lukas:  call HAL_Start... functions
+	HAL_ADC_Start_DMA(&hadc1,adc_raw_values, NUMBER_OF_ADC_CHANNLES);
+
 
 }
 /* USER CODE END 0 */

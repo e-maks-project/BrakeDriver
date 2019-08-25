@@ -33,12 +33,24 @@
 extern TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN Private defines */
-
+#define NUMBER_OF_ENCODERS  4
 /* USER CODE END Private defines */
 
 void MX_TIM3_Init(void);
 
 /* USER CODE BEGIN Prototypes */
+typedef struct {
+	volatile uint16_t pulse_count;
+	volatile uint16_t forward_count;
+	volatile uint16_t rotaction_count;
+}hal_encoder;
+
+typedef struct{
+	hal_encoder* encoders;
+	uint8_t number_of_encoders;
+}hal_encoders;
+
+static hal_encoder defined_encoders[NUMBER_OF_ENCODERS];
 
 /* USER CODE END Prototypes */
 

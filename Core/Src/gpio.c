@@ -20,7 +20,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "gpio.h"
 /* USER CODE BEGIN 0 */
-
+pins_irq_handlers hal_pins_handlers;
 /* USER CODE END 0 */
 
 /*----------------------------------------------------------------------------*/
@@ -82,16 +82,16 @@ void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PtPin */
-  GPIO_InitStruct.Pin = LOW_LIMIT_SWITCH_Pin;
+  GPIO_InitStruct.Pin = LATT_LOW_LIMIT_ACTUATOR_PIN;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(LOW_LIMIT_SWITCH_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(LATT_LOW_LIMIT_ACTUATOR_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PtPin */
-  GPIO_InitStruct.Pin = HIGH_LIMIT_SWITCH_Pin;
+  GPIO_InitStruct.Pin = LATT_HIGH_LIMIT_ACTUATOR_SWITCH_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(HIGH_LIMIT_SWITCH_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(LATT_HIGH_LIMIT_ACTUATOR_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PB2 PB12 PB13 PB14 
                            PB15 PB3 PB4 PB5 
@@ -118,6 +118,20 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 	 * hierarchy :
 	 * EXTI9_5_IRQHandler()->HAL_GPIO_EXTI_IRQHandler(pin)->HAL_GPIO_EXTI_Callback()( if statements)
 	 */
+	if(hal_pins_handlers.low_limit_activated_handler == NULL ||
+			hal_pins_handlers.high_limit_activated_hadler == NULL){
+		return;
+	}
+
+
+	if(GPIO_Pin == LATT_LOW_LIMIT_ACTUATOR_PIN){
+		hal_pins_handlers.low_limit_activated_handler();
+	}else
+	{
+		hal_pins_handlers.high_limit_activated_handler();
+	}
+
+
 }
 /* USER CODE END 2 */
 

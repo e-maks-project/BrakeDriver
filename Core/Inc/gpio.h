@@ -32,6 +32,11 @@
 /* USER CODE END Includes */
 
 /* USER CODE BEGIN Private defines */
+typedef struct {
+	void(*high_limit_activated_hadler)(void);
+	void(*low_limit_activated_handler)(void);
+}pins_irq_handlers;
+
 
 /* USER CODE END Private defines */
 

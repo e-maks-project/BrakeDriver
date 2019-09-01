@@ -34,6 +34,11 @@ extern TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN Private defines */
 #define NUMBER_OF_ENCODERS  4
+
+typedef struct{
+	void (*set_slip_pwm)(uint16);
+	void(*set_propound_pwm)(uint16);
+}hal_pwm;
 /* USER CODE END Private defines */
 
 void MX_TIM3_Init(void);

@@ -21,6 +21,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "adc.h"
+#include "can.h"
 #include "dma.h"
 #include "i2c.h"
 #include "tim.h"
@@ -43,7 +44,8 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-
+extern  CAN_HandleTypeDef hcan;
+extern TIM_HandleTypeDef htim3;
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -71,18 +73,16 @@ void hal_init(void){
 	MX_ADC1_Init();
 	MX_I2C2_Init();
 	MX_TIM3_Init();
+	MX_CAN_Init();
 
 	// todo Lukas:  call HAL_Start... functions
 	HAL_ADC_Start_DMA(&hadc1,adc_raw_values, NUMBER_OF_ADC_CHANNLES);
-
+	HAL_TIM_Base_Start(&htim3);
+	//hal_can_filter_init();
+	HAL_CAN_Start(&hcan);
 
 }
 /* USER CODE END 0 */
-
-/**
-  * @brief  The application entry point.
-  * @retval int
-  */
 
 /**
   * @brief System Clock Configuration

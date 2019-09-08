@@ -73,22 +73,20 @@ void MX_GPIO_Init(void)
   HAL_GPIO_Init(ACS_FAULT_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PA2 PA3 PA4 PA5 
-                           PA8 PA9 PA10 PA11 
-                           PA12 PA15 */
+                           PA8 PA9 PA10 PA15 */
   GPIO_InitStruct.Pin = GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5 
-                          |GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_11 
-                          |GPIO_PIN_12|GPIO_PIN_15;
+                          |GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_15;
   GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PtPin */
-  GPIO_InitStruct.Pin = LATT_LOW_LIMIT_ACTUATOR_PIN;
+  GPIO_InitStruct.Pin = LATT_LOW_LIMIT_ACTUATOR_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(LATT_LOW_LIMIT_ACTUATOR_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PtPin */
-  GPIO_InitStruct.Pin = LATT_HIGH_LIMIT_ACTUATOR_SWITCH_Pin;
+  GPIO_InitStruct.Pin = LATT_HIGH_LIMIT_ACTUATOR_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(LATT_HIGH_LIMIT_ACTUATOR_GPIO_Port, &GPIO_InitStruct);
@@ -119,12 +117,12 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 	 * EXTI9_5_IRQHandler()->HAL_GPIO_EXTI_IRQHandler(pin)->HAL_GPIO_EXTI_Callback()( if statements)
 	 */
 	if(hal_pins_handlers.low_limit_activated_handler == NULL ||
-			hal_pins_handlers.high_limit_activated_hadler == NULL){
+			hal_pins_handlers.high_limit_activated_handler == NULL){
 		return;
 	}
 
 
-	if(GPIO_Pin == LATT_LOW_LIMIT_ACTUATOR_PIN){
+	if(GPIO_Pin == LATT_LOW_LIMIT_ACTUATOR_Pin){
 		hal_pins_handlers.low_limit_activated_handler();
 	}else
 	{

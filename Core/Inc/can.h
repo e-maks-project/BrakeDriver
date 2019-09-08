@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * File Name          : gpio.h
-  * Description        : This file contains all the functions prototypes for 
-  *                      the gpio  
+  * File Name          : CAN.h
+  * Description        : This file provides code for the configuration
+  *                      of the CAN instances.
   ******************************************************************************
   * @attention
   *
@@ -16,10 +16,9 @@
   *
   ******************************************************************************
   */
-
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __gpio_H
-#define __gpio_H
+#ifndef __can_H
+#define __can_H
 #ifdef __cplusplus
  extern "C" {
 #endif
@@ -31,25 +30,32 @@
 
 /* USER CODE END Includes */
 
-/* USER CODE BEGIN Private defines */
-typedef struct {
-	void(*high_limit_activated_handler)(void);
-	void(*low_limit_activated_handler)(void);
-}pins_irq_handlers;
+extern CAN_HandleTypeDef hcan;
 
+/* USER CODE BEGIN Private defines */
+typedef struct{
+	void(*process_message)(uint8_t*, uint8_t);
+	uint8_t received_data;
+}can_rx_interrupt_handler;
+
+typedef struct{
+	CAN_TxHeaderTypeDef     header;
+	uint32_t 				mailbox;
+	uint8_t*				data;
+}hal_can_message;
 
 /* USER CODE END Private defines */
 
-void MX_GPIO_Init(void);
+void MX_CAN_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-
+void hal_can_send(uint16_t frame_id, uint8_t dlc, uint8_t* data);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus
 }
 #endif
-#endif /*__ pinoutConfig_H */
+#endif /*__ can_H */
 
 /**
   * @}

@@ -24,8 +24,8 @@ void min_propound_actuator_activated(void){
 
 }
 void init_irq_functions(void){
-	hal_pins_handlers.high_limit_activated_hadler = max_propound_actuator;
-	hal_pins_handlers.low_limit_activated_hadler = min_propound_actuator;
+	hal_pins_handlers.high_limit_activated_handler = max_propound_actuator_activated;
+	hal_pins_handlers.low_limit_activated_handler = min_propound_actuator_activated;
 }
 
 

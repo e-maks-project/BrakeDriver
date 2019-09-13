@@ -25,3 +25,11 @@ uint8_t* encode_frame_big_endian(uint8_t* data , uint8_t data_length){
 	return encoded_data;
 }
 
+uint16_t* decode_fame_to_uint16(uint8_t* data, uint8_t* data_length){
+	uint16_t* decoded_frame_data = (uint16_t*)calloc(data_length,sizeof(uint16_t));
+	for( uint8_t i = 1 ; i < data_length; i+=2){
+		decoded_frame_data = (uint16_t)data[i-1] +((uint16_t)data[i] << 8);
+	}
+	return decoded_frame_data;
+}
+

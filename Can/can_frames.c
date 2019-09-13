@@ -24,28 +24,18 @@ void send_test_frame(void){
 
 
 void send_confirmation(uint8_t* data, uint8_t length){
-	uint8_t data_to_encode[]={
-				data[1],
-				data[0]
-		};
-	 uint8_t* encoded_data = encode_frame_big_endian(data_to_encode,length);
-	messages[1].data =  encoded_data;
-	free(encoded_data);
-}
 
-
-uint16_t* couple_frame_data_to_uint16(uint8_t* data, uint8_t length){
-	static uint16_t extracted_data[4];
-
-	for(uint8_t i = 1 ;  i < length ; i += 2){
-		extracted_data[i] = (uint16_t)data[i-1] | ((uint16_t)data[i] << 8);
+	messages[1].data = data;
+	if(hardware_can.can_transmit != NULL){
+		hardware_can.can_transmit(messages[1].frame_id,messages[1].dlc,messages[1].data);
 	}
-	return extracted_data;
 }
 
 uint16_t  extract_joy_data(uint16_t* coupled_data){
 	if(coupled_data[0] == 0){
 		return coupled_data[1];
 	}
+	return 0;
 }
+
 

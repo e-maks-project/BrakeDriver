@@ -234,7 +234,7 @@ void DMA1_Channel5_IRQHandler(void)
 void CAN1_RX1_IRQHandler(void)
 {
   /* USER CODE BEGIN CAN1_RX1_IRQn 0 */
-
+  HAL_CAN_RxFifo0MsgPendingCallback(&hcan);
   /* USER CODE END CAN1_RX1_IRQn 0 */
   HAL_CAN_IRQHandler(&hcan);
   /* USER CODE BEGIN CAN1_RX1_IRQn 1 */

@@ -10,15 +10,12 @@
 
 #include "can.h"
 
-#define USER_INTERFACE_FRAME_ID  0XD45
 #define CONFIRMATION_FRAME_ID	 0xD10
-
-#define USER_INTERFACE_FRAME_DLC 2
 #define CONFIRMATION_FRAME_DLC   2
 
 typedef struct{
 	void (*can_transmit)(uint16_t, uint8_t, uint8_t*);
-	void (*can_recive)(uint16_t, uint8_t, uint8_t*);
+	void (*can_recive)(uint32_t, uint8_t*, uint8_t);
 	uint8_t hardware_functions_attached;
 }can_functions;
 

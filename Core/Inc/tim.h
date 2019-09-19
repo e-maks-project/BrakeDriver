@@ -36,8 +36,8 @@ extern TIM_HandleTypeDef htim3;
 #define NUMBER_OF_ENCODERS  4
 
 typedef struct{
-	void (*set_slip_pwm)(uint16);
-	void(*set_propound_pwm)(uint16);
+	void (*set_slip_pwm) (uint16_t);
+	void (*set_propound_pwm) (uint16_t);
 }hal_pwm;
 /* USER CODE END Private defines */
 

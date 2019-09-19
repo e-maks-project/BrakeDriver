@@ -7,6 +7,7 @@
 #include "latt.h"
 
 extern pins_irq_handlers hal_pins_handlers;
+actuator_parameters latt;
 
 void do_piston_propound(void){
 

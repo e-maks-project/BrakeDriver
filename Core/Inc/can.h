@@ -33,6 +33,9 @@
 extern CAN_HandleTypeDef hcan;
 
 /* USER CODE BEGIN Private defines */
+#define CAN_FRAMES_ID_LOW			0x20D
+#define CAN_FRAMES_ID_HIGH			0x24D
+
 #define USER_INTERFACE_X_AXIS_FRAME  0x21D
 #define USER_INTERFACE_Y_AXIS_FRAME  0X22D
 #define USER_INTERFACE_DLC			 4

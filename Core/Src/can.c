@@ -131,8 +131,8 @@ void hal_can_filter_init(void){
 	hcan_filter.FilterFIFOAssignment = CAN_FILTER_FIFO0;
 	hcan_filter.FilterIdHigh = 0xFFFF;
 	//filter only user interface frames
-	hcan_filter.FilterIdLow = 0x0;
-	hcan_filter.FilterIdHigh = 0x0;
+	hcan_filter.FilterIdLow = CAN_FRAMES_ID_LOW;
+	hcan_filter.FilterIdHigh = CAN_FRAMES_ID_HIGH;
 	hcan_filter.FilterIdLow = 0x0;
 	hcan_filter.FilterScale = CAN_FILTERSCALE_32BIT;
 	hcan_filter.FilterActivation = ENABLE;

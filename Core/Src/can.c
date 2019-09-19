@@ -22,8 +22,7 @@
 
 /* USER CODE BEGIN 0 */
 CAN_FilterTypeDef hcan_filter;
-CAN_RxHeaderTypeDef rx_message;
-CAN_TxHeaderTypeDef tx_message;
+hal_can_messages can_messages;
 uint32_t mailbox;
 can_rx_interrupt_handler hal_can_rx;
 
@@ -116,19 +115,22 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
 } 
 
 /* USER CODE BEGIN 1 */
-void hal_can_handler(void){
-	printf("data_ received \n");
-	//HAL_CAN_GetRxMessage(&hcan,CAN_RX_FIFO0,&rx_message, &hal_can_rx.received_data );
-}
 
 void HAL_CAN_RxFifo0MsgPendingCallback (CAN_HandleTypeDef* hcan ){
-	hal_can_handler();
+	//todo Lukas : here only reference to app layer interrupt handler.
+	HAL_CAN_GetRxMessage(hcan,CAN_RX_FIFO0,
+			&can_messages.rx_header,
+			can_messages.rx_data );
+	hal_can_rx.process_message(can_messages.rx_header.StdId,
+			can_messages.rx_data,
+			can_messages.rx_header.DLC);
 
 }
 
 void hal_can_filter_init(void){
 	hcan_filter.FilterFIFOAssignment = CAN_FILTER_FIFO0;
 	hcan_filter.FilterIdHigh = 0xFFFF;
+	//filter only user interface frames
 	hcan_filter.FilterIdLow = 0x0;
 	hcan_filter.FilterIdHigh = 0x0;
 	hcan_filter.FilterIdLow = 0x0;
@@ -140,14 +142,13 @@ void hal_can_filter_init(void){
 
 
 void hal_can_send(uint16_t frame_id, uint8_t dlc, uint8_t* data){
-	hal_can_message  hal_message;
-	hal_message.data = data;
-	hal_message.header.DLC = dlc;
-	hal_message.header.RTR = CAN_RTR_DATA;
-	hal_message.header.IDE  = CAN_ID_STD;
-	hal_message.header.StdId = frame_id;
+	can_messages.tx_data = data;
+	can_messages.tx_header.DLC = dlc;
+	can_messages.tx_header.RTR = CAN_RTR_DATA;
+	can_messages.tx_header.IDE  = CAN_ID_STD;
+	can_messages.tx_header.StdId = frame_id;
 	uint16_t a =0;
-	while(HAL_CAN_AddTxMessage(&hcan, &(hal_message.header),hal_message.data,&(hal_message.mailbox)) == HAL_ERROR){
+	while(HAL_CAN_AddTxMessage(&hcan, &(can_messages.tx_header),can_messages.tx_data,&(can_messages.mailbox)) == HAL_ERROR){
 		a++;
 	}
 }

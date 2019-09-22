@@ -140,7 +140,6 @@ void hal_can_filter_init(void){
 	HAL_CAN_ConfigFilter(&hcan,&hcan_filter);
 }
 
-
 void hal_can_send(uint16_t frame_id, uint8_t dlc, uint8_t* data){
 	can_messages.tx_data = data;
 	can_messages.tx_header.DLC = dlc;

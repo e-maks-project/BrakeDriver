@@ -30,10 +30,11 @@
     - +:test/**
     - -:test/support
   :source:
-    - ../ 
-    - ../Core/Inc
-    - ../Core/Src
-    - ../Measurements/Current
+    - ../
+    - HardwareMock/**
+    - ../Measurements/**
+    - ../Actuator/**
+    - ../Can
   :support:
     - test/support
 

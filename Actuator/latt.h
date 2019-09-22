@@ -19,6 +19,8 @@
 typedef struct{
 	uint16_t speed_value_encoded;
 	float speed_value_decoded;
+	bool is_max_lenght_reached;
+	bool is_min_lenght_reached;
 }actuator_parameters;
 extern actuator_parameters latt;
 

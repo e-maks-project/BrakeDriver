@@ -146,10 +146,7 @@ void hal_can_send(uint16_t frame_id, uint8_t dlc, uint8_t* data){
 	can_messages.tx_header.RTR = CAN_RTR_DATA;
 	can_messages.tx_header.IDE  = CAN_ID_STD;
 	can_messages.tx_header.StdId = frame_id;
-	uint16_t a =0;
-	while(HAL_CAN_AddTxMessage(&hcan, &(can_messages.tx_header),can_messages.tx_data,&(can_messages.mailbox)) == HAL_ERROR){
-		a++;
-	}
+	HAL_CAN_AddTxMessage(&hcan, &(can_messages.tx_header),can_messages.tx_data,&(can_messages.mailbox));
 }
 
 /* USER CODE END 1 */

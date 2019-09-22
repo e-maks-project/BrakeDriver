@@ -37,6 +37,9 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
+typedef char bool;
+#define TRUE  1
+#define FALSE 0
 
 /* USER CODE END ET */
 

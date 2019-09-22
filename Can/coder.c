@@ -32,8 +32,3 @@ uint16_t* decode_fame_to_uint16(uint8_t* data, uint8_t* data_length){
 	}
 	return decoded_frame_data;
 }
-
-uint16 decode_uint8_to_uint16(uint8* uint8_data, uint8 start_byte){
-	return (uint16)uint8_data[start_byte + 1]
-										+ uint8_data[start_byte];
-}

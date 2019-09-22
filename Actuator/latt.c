@@ -7,7 +7,10 @@
 #include "latt.h"
 
 extern pins_irq_handlers hal_pins_handlers;
-actuator_parameters latt;
+actuator_parameters latt = {
+		.is_max_lenght_reached = FALSE,
+		.is_min_lenght_reached = TRUE
+};
 
 void do_piston_propound(void){
 

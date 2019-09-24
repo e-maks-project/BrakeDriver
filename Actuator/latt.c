@@ -41,6 +41,7 @@ bool is_edge_reached(void){
 
 void set_latt_speed(float encoded_speed){
 	//todo Lukas fill this
+	//todo Lukas create tests first
 }
 
 

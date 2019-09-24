@@ -73,12 +73,17 @@ void hal_init(void){
 	MX_ADC1_Init();
 	MX_I2C2_Init();
 	MX_TIM3_Init();
+	MX_TIM1_Init();
+
 	MX_CAN_Init();
 
 	// todo Lukas:  call HAL_Start... functions
 	HAL_ADC_Start_DMA(&hadc1,adc_raw_values, NUMBER_OF_ADC_CHANNLES);
 	HAL_TIM_Base_Start(&htim3);
-	//hal_can_filter_init();
+	HAL_TIM_Base_Start(&htim1);
+	HAL_TIM_PWM_Start(&htim1, 2);
+	HAL_TIM_PWM_Start(&htim1, 3);
+	hal_can_filter_init();
 	HAL_CAN_Start(&hcan);
 
 }

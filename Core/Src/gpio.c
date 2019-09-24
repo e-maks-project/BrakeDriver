@@ -73,9 +73,9 @@ void MX_GPIO_Init(void)
   HAL_GPIO_Init(ACS_FAULT_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PA2 PA3 PA4 PA5 
-                           PA8 PA9 PA10 PA15 */
+                           PA8 PA15 */
   GPIO_InitStruct.Pin = GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5 
-                          |GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_15;
+                          |GPIO_PIN_8|GPIO_PIN_15;
   GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
@@ -121,7 +121,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 		return;
 	}
 
-
 	if(GPIO_Pin == LATT_LOW_LIMIT_ACTUATOR_Pin){
 		hal_pins_handlers.low_limit_activated_handler();
 	}else
@@ -129,8 +128,16 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 		hal_pins_handlers.high_limit_activated_handler();
 	}
 
-
 }
+
+void hal_set_piston_enable_pins(void){
+   // configure in MX cube enable pins
+}
+
+void hal_reset_piston_enable_pins(void){
+   // configure in MX cube enable pins
+}
+
 /* USER CODE END 2 */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

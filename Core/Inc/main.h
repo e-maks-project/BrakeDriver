@@ -37,7 +37,9 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
-
+typedef char bool;
+#define TRUE  1
+#define FALSE 0
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/
@@ -76,6 +78,10 @@ void Error_Handler(void);
 #define ENCODER_2_A_GPIO_Port GPIOB
 #define ENCODER_2_B_Pin GPIO_PIN_1
 #define ENCODER_2_B_GPIO_Port GPIOB
+#define PWM1_Pin GPIO_PIN_9
+#define PWM1_GPIO_Port GPIOA
+#define PWM2_Pin GPIO_PIN_10
+#define PWM2_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
 #define EXTI_LOW_LIMIT_SWITCH_PIN_INDEX  6
 #define EXTI_HIGH_LIMIT_SWITCH_PIN_INDEX 7

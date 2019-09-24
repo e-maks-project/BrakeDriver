@@ -17,8 +17,18 @@
 #define NO_LOAD_CURRENT	0,5// A
 
 typedef struct{
+	void (*enable_latt_driver)(void);       // dopisac piny w MX cube
+	void (*disable_latt_driver)(void);      // dopisac piny MX cube
+	void (*set_speed_forward)(uint16_t);
+	void (*set_speed_backward)(uint16_t);
+	void (*stop_latt)(void);
+}latt_function ;
+
+typedef struct{
 	uint16_t speed_value_encoded;
 	float speed_value_decoded;
+	bool is_max_length_reached;
+	bool is_min_length_reached;
 }actuator_parameters;
 extern actuator_parameters latt;
 

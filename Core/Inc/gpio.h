@@ -43,7 +43,8 @@ typedef struct {
 void MX_GPIO_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-
+void hal_set_piston_enable_pins(void);
+void hal_reset_piston_enable_pins(void);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

@@ -26,7 +26,6 @@ uint16_t decode_uint8_to_uint16(uint8_t* data, uint8_t start_byte){
 
 void decode_received_data(uint32_t frame_id, uint8_t* data, uint8_t dlc){
 	if(frame_id == USER_INTERFACE_X_AXIS_FRAME){
-		latt.speed_value_encoded = decode_uint8_to_uint16(data, 2);
 		//todo Lukas decode uint16 to float, write some test
 	}
 

@@ -16,21 +16,24 @@
 #define NOMINAL_LOAD	45 // Kg
 #define NO_LOAD_CURRENT	0,5// A
 
+typedef enum{
+	move_forward,
+	move_backward
+}latt_move_direction;
+
+
 typedef struct{
 	void (*enable_latt_driver)(void);       // dopisac piny w MX cube
 	void (*disable_latt_driver)(void);      // dopisac piny MX cube
 	void (*set_speed_forward)(uint16_t);
 	void (*set_speed_backward)(uint16_t);
+	bool (*is_high_limit_active)(void);
+	bool (*is_low_limit_active)(void);
 	void (*stop_latt)(void);
 }latt_function ;
 
-typedef struct{
-	uint16_t speed_value_encoded;
-	float speed_value_decoded;
-	bool is_max_length_reached;
-	bool is_min_length_reached;
-}actuator_parameters;
-extern actuator_parameters latt;
-
+void init_irq_functions(void);
+latt_function* get_latt_function_pointers(void); // for tests purposes
+void set_latt_speed(latt_move_direction direction, float speed);
 
 #endif /* ACTUATOR_LATT_H_ */

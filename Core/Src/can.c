@@ -22,8 +22,8 @@
 
 /* USER CODE BEGIN 0 */
 CAN_FilterTypeDef hcan_filter;
-hal_can_messages can_messages;
-uint32_t mailbox;
+static hal_can_messages can_messages;
+static uint32_t mailbox;
 can_rx_interrupt_handler hal_can_rx;
 
 /* USER CODE END 0 */
@@ -148,7 +148,6 @@ void hal_can_send(uint16_t frame_id, uint8_t dlc, uint8_t* data){
 	can_messages.tx_header.StdId = frame_id;
 	HAL_CAN_AddTxMessage(&hcan, &(can_messages.tx_header),can_messages.tx_data,&(can_messages.mailbox));
 }
-
 /* USER CODE END 1 */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

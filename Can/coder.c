@@ -7,8 +7,8 @@
 #include "coder.h"
 #include <malloc.h>
 
-coding_parameter uint16_5_5 ={.bits =16, .offset = 0,.range = 100};
-coding_parameter int16_5_5 = {.bits = 16, .offset = 127,.range =100};
+coding_parameter uint16_5_5 ={.bits =16, .offset = 0,.range = 5.5};
+coding_parameter int16_5_5 = {.bits = 16, .offset = 127,.range =5.5};
 
 uint16_t encode_float_to_uint16(float value, coding_parameter param){
 	if( value > param.range){
@@ -31,4 +31,9 @@ uint16_t* decode_fame_to_uint16(uint8_t* data, uint8_t* data_length){
 		decoded_frame_data = (uint16_t)data[i-1] +((uint16_t)data[i] << 8);
 	}
 	return decoded_frame_data;
+}
+
+float decode_uint16_to_float(uint16_t data, coding_parameter parameter){
+	return ((float)data * ( parameter.range/parameter.bits)) - parameter.offset;
+
 }

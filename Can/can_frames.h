@@ -32,8 +32,15 @@ typedef struct{
 	uint16_t frame_id;
 }can_message;
 
+typedef struct{
+	bool is_data_new;
+	float data;
+}joy_data;
+
 extern can_functions hardware_can;
 
 void send_test_frame(void);
-uint16_t decode_joy_data(uint32_t frame_id, uint8_t* data, uint8_t dlc);
+joy_data* get_joy_data(void);
+void reset_joy_data(void);
+void decode_joy_data(uint32_t frame_id, uint8_t* data, uint8_t dlc);
 #endif /* CAN_CAN_FRAMES_H_ */

@@ -139,7 +139,7 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* adcHandle)
 
 /* USER CODE BEGIN 1 */
 uint32_t* get_raw_adc_data(void){
-	retrun adc_raw_values;
+	return adc_raw_values;
 }
 /* USER CODE END 1 */
 

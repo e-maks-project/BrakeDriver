@@ -31,9 +31,6 @@ void decode_received_data(uint32_t frame_id, uint8_t* data, uint8_t dlc){
 
 }
 
-void send_test_frame(void){
-	hardware_can.can_transmit(0x0F0, 4, (uint8_t[]){0xDE, 0xAD, 0xBE, 0xEF});
-}
 
 void send_confirmation(uint8_t* data, uint8_t length){
 
@@ -51,3 +48,6 @@ uint16_t  extract_joy_data(uint16_t* coupled_data){
 }
 
 
+void send_test_frame(void){
+	hardware_can.can_transmit(0x0F0, 4, (uint8_t[]){0xDE, 0xAD, 0xBE, 0xEF});
+}

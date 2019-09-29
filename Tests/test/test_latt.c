@@ -29,8 +29,8 @@ void setUp(void)
 {
 	get_latt_function_pointers()->disable_latt_driver = disable_latt_mock;
 	get_latt_function_pointers()->enable_latt_driver = enable_latt_mock;
-	get_latt_function_pointers()->is_high_limit_active = read_low_pin_mock;
-	get_latt_function_pointers()->is_low_limit_active = read_low_pin_mock;
+	get_latt_function_pointers()->is_piston_extended = read_low_pin_mock;
+	get_latt_function_pointers()->is_piston_retracted = read_low_pin_mock;
 	get_latt_function_pointers()->set_speed_backward = set_backward_pwm_mock;
 	get_latt_function_pointers()->set_speed_forward = set_forward_pwm_mock;
 	get_latt_function_pointers()->stop_latt = reset_pwm_mock;
@@ -55,8 +55,8 @@ void test_set_latt_forward_speed_normal_case(void){
 
 void test_set_latt_forward_speed_min_reached(void){
 	// arrange
-	get_latt_function_pointers()->is_high_limit_active = read_low_pin_mock;
-	get_latt_function_pointers()->is_low_limit_active = read_high_pin_mock ;
+	get_latt_function_pointers()->is_piston_extended = read_low_pin_mock;
+	get_latt_function_pointers()->is_piston_retracted = read_high_pin_mock ;
 
 	// act
 	set_latt_speed(move_forward, 500);
@@ -68,7 +68,7 @@ void test_set_latt_forward_speed_min_reached(void){
 
 void test_set_latt_forward_speed_max_reached(void){
 	// arrange
-	get_latt_function_pointers()->is_high_limit_active = read_high_pin_mock;
+	get_latt_function_pointers()->is_piston_extended = read_high_pin_mock;
 
 	// act
 	set_latt_speed(move_forward, 500);
@@ -90,7 +90,7 @@ void test_set_latt_backward_speed_normal_case(void){
 
 void test_set_latt_backward_speed_max_reached(void){
 	// arrange
-	get_latt_function_pointers()->is_high_limit_active = read_high_pin_mock;
+	get_latt_function_pointers()->is_piston_extended = read_high_pin_mock;
 
 	// act
 	set_latt_speed(move_backward, 500);
@@ -102,7 +102,7 @@ void test_set_latt_backward_speed_max_reached(void){
 
 void test_set_latt_backward_speed_min_reached(void){
 	// arrange
-	get_latt_function_pointers()->is_low_limit_active = read_high_pin_mock;
+	get_latt_function_pointers()->is_piston_retracted = read_high_pin_mock;
 
 	// act
 	set_latt_speed(move_backward, 500);

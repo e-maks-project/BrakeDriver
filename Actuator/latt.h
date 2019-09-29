@@ -21,19 +21,18 @@ typedef enum{
 	move_backward
 }latt_move_direction;
 
-
 typedef struct{
 	void (*enable_latt_driver)(void);       // dopisac piny w MX cube
 	void (*disable_latt_driver)(void);      // dopisac piny MX cube
 	void (*set_speed_forward)(uint16_t);
 	void (*set_speed_backward)(uint16_t);
-	bool (*is_high_limit_active)(void);
-	bool (*is_low_limit_active)(void);
+	bool (*is_piston_retracted)(void);
+	bool (*is_piston_extended)(void);
 	void (*stop_latt)(void);
 }latt_function ;
 
-void init_irq_functions(void);
-latt_function* get_latt_function_pointers(void); // for tests purposes
+latt_function* get_latt_function_pointers(void);
+void init_latt_driver(void);
 void set_latt_speed(latt_move_direction direction, float speed);
 
 #endif /* ACTUATOR_LATT_H_ */

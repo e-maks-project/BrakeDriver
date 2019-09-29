@@ -21,7 +21,7 @@ typedef struct{
 }data;
 
 typedef struct{
-	uint8_t  is_fault;
+	bool is_fault;
 	data voltage;
 	data current;
 }current_measurement;

@@ -15,8 +15,8 @@ static latt_function latt ={
 		.set_speed_backward = hal_set_backward_pwm,
 		.enable_latt_driver = hal_set_piston_enable_pins,
 		.disable_latt_driver = hal_reset_piston_enable_pins,
-		.is_high_limit_active = is_actuator_low_limit_active,
-		.is_low_limit_active = is_actuator_high_limit_active
+		.is_piston_retracted = is_actuator_low_limit_active,
+		.is_piston_extended = is_actuator_high_limit_active
 };
 
 static void max_length_reached(void){
@@ -28,7 +28,7 @@ static void min_length_reached(void){
 }
 
 static void set_forward_speed(float speed){
-	if(latt.is_high_limit_active()){
+	if(latt.is_piston_extended()){
 		latt.set_speed_forward(0);
 	}else{
 		latt.set_speed_backward(0);
@@ -36,14 +36,13 @@ static void set_forward_speed(float speed){
 	}
 }
 static void set_backward_speed(float speed){
-	if(latt.is_low_limit_active()){
+	if(latt.is_piston_retracted()){
 		latt.set_speed_backward(0);
 	}else{
 		latt.set_speed_forward(0);
 		latt.set_speed_backward(speed);
 	}
 }
-
 
 latt_function* get_latt_function_pointers(void){
 	return &latt;
@@ -58,7 +57,8 @@ void set_latt_speed(latt_move_direction direction, float speed){
 	}
 }
 
-void init_irq_functions(void){
+void init_latt_driver(void){
+	latt.enable_latt_driver();
 	hal_pins_handlers.high_limit_activated_handler = max_length_reached;
 	hal_pins_handlers.low_limit_activated_handler = min_length_reached;
 }

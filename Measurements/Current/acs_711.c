@@ -17,13 +17,15 @@ current_measurement* get_current_ptr(void){
 }
 
 float decode_voltage(uint32_t encoded_voltage){
-	return (float)((float)encoded_voltage *STM32_ADC_REFERENCE_VOLTAGE
+	float  voltage = (float)((float)encoded_voltage *STM32_ADC_REFERENCE_VOLTAGE
 			/ STM32_ADC_RESOLUTION);
+	acs_data.is_fault = (voltage > STM32_ADC_REFERENCE_VOLTAGE)? TRUE : FALSE;
+	return (!acs_data.is_fault)? voltage : 0.0;
 }
-//todo Lukas : check it in actual conditions
+//todo Lukas : make units calculations
 float decode_current(float voltage){
 	return (float)((voltage - ACS_711_OFFSET
-			* ACS_711_SENSITIVITY));
+			* (ACS_711_SENSITIVITY/1000)));
 }
 
 // todo Lukas: replace magic number

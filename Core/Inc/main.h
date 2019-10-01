@@ -61,10 +61,10 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define ADC_1_Pin GPIO_PIN_2
-#define ADC_1_GPIO_Port GPIOC
-#define ADC_2_Pin GPIO_PIN_3
-#define ADC_2_GPIO_Port GPIOC
+#define LATT_MIN_LENGTH_Pin GPIO_PIN_2
+#define LATT_MIN_LENGTH_GPIO_Port GPIOC
+#define LATT_MAX_LENGTH_Pin GPIO_PIN_3
+#define LATT_MAX_LENGTH_GPIO_Port GPIOC
 #define ACS_FAULT_Pin GPIO_PIN_0
 #define ACS_FAULT_GPIO_Port GPIOA
 #define ACS_CURRENT_Pin GPIO_PIN_1

@@ -30,13 +30,12 @@
 
 /* USER CODE END Includes */
 
-extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN Private defines */
 #define NUMBER_OF_ENCODERS  4
-#define PWM1_CHANNEL        2
-#define PWM2_CHANNEL		3
+#define PWM1_CHANNEL        3
+#define PWM2_CHANNEL		4
 
 typedef struct{
 	void (*set_slip_pwm) (uint16_t);
@@ -44,7 +43,6 @@ typedef struct{
 }hal_pwm;
 /* USER CODE END Private defines */
 
-void MX_TIM1_Init(void);
 void MX_TIM3_Init(void);
                         
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);

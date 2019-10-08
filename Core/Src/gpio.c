@@ -73,9 +73,9 @@ void MX_GPIO_Init(void)
   HAL_GPIO_Init(ACS_FAULT_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PA2 PA3 PA4 PA5 
-                           PA8 PA15 */
+                           PA8 PA9 PA10 PA15 */
   GPIO_InitStruct.Pin = GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5 
-                          |GPIO_PIN_8|GPIO_PIN_15;
+                          |GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_15;
   GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
@@ -132,14 +132,14 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 
 bool is_actuator_low_limit_active(void){
 	//todo Lukas: check logic
-	return HAL_GPIO_ReadPin(LATT_LOW_LIMIT_ACTUATOR_GPIO_Port,
+	return !HAL_GPIO_ReadPin(LATT_LOW_LIMIT_ACTUATOR_GPIO_Port,
 			LATT_LOW_LIMIT_ACTUATOR_Pin);
 }
 
 bool is_actuator_high_limit_active(void){
 	//todo Lukas check logic
-	return HAL_GPIO_ReadPin(LATT_LOW_LIMIT_ACTUATOR_GPIO_Port,
-			LATT_LOW_LIMIT_ACTUATOR_Pin);
+	return !HAL_GPIO_ReadPin(LATT_HIGH_LIMIT_ACTUATOR_GPIO_Port,
+			LATT_HIGH_LIMIT_ACTUATOR_Pin);
 }
 
 

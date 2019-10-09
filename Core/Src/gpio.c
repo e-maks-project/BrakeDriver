@@ -142,15 +142,6 @@ bool is_actuator_high_limit_active(void){
 			LATT_HIGH_LIMIT_ACTUATOR_Pin);
 }
 
-
-void hal_set_piston_enable_pins(void){
-   // configure in MX cube enable pins
-}
-
-void hal_reset_piston_enable_pins(void){
-   // configure in MX cube enable pins
-}
-
 /* USER CODE END 2 */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -22,8 +22,6 @@ typedef enum{
 }latt_move_direction;
 
 typedef struct{
-	void (*enable_latt_driver)(void);       // dopisac piny w MX cube
-	void (*disable_latt_driver)(void);      // dopisac piny MX cube
 	void (*set_speed_forward)(uint16_t);
 	void (*set_speed_backward)(uint16_t);
 	bool (*is_piston_retracted)(void);

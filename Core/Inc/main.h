@@ -37,7 +37,9 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
-
+typedef char bool;
+#define TRUE  1
+#define FALSE 0
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/
@@ -72,10 +74,10 @@ void Error_Handler(void);
 #define LATT_HIGH_LIMIT_ACTUATOR_Pin GPIO_PIN_7
 #define LATT_HIGH_LIMIT_ACTUATOR_GPIO_Port GPIOA
 #define LATT_HIGH_LIMIT_ACTUATOR_EXTI_IRQn EXTI9_5_IRQn
-#define ENCODER_2_A_Pin GPIO_PIN_0
-#define ENCODER_2_A_GPIO_Port GPIOB
-#define ENCODER_2_B_Pin GPIO_PIN_1
-#define ENCODER_2_B_GPIO_Port GPIOB
+#define ENCODER_2_A_PWM_Pin GPIO_PIN_0
+#define ENCODER_2_A_PWM_GPIO_Port GPIOB
+#define ENCODER_2_B_PWM_Pin GPIO_PIN_1
+#define ENCODER_2_B_PWM_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 #define EXTI_LOW_LIMIT_SWITCH_PIN_INDEX  6
 #define EXTI_HIGH_LIMIT_SWITCH_PIN_INDEX 7

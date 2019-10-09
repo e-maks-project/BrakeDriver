@@ -44,6 +44,8 @@ void MX_GPIO_Init(void);
 
 /* USER CODE BEGIN Prototypes */
 
+bool is_actuator_low_limit_active(void);
+bool is_actuator_high_limit_active(void);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

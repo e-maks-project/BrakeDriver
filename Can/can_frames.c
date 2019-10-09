@@ -26,15 +26,11 @@ uint16_t decode_uint8_to_uint16(uint8_t* data, uint8_t start_byte){
 
 void decode_received_data(uint32_t frame_id, uint8_t* data, uint8_t dlc){
 	if(frame_id == USER_INTERFACE_X_AXIS_FRAME){
-		latt.speed_value_encoded = decode_uint8_to_uint16(data, 2);
 		//todo Lukas decode uint16 to float, write some test
 	}
 
 }
 
-void send_test_frame(void){
-	hardware_can.can_transmit(0x0F0, 4, (uint8_t[]){0xDE, 0xAD, 0xBE, 0xEF});
-}
 
 void send_confirmation(uint8_t* data, uint8_t length){
 
@@ -52,3 +48,6 @@ uint16_t  extract_joy_data(uint16_t* coupled_data){
 }
 
 
+void send_test_frame(void){
+	hardware_can.can_transmit(0x0F0, 4, (uint8_t[]){0xDE, 0xAD, 0xBE, 0xEF});
+}

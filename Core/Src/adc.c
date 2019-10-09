@@ -22,6 +22,8 @@
 
 /* USER CODE BEGIN 0 */
 uint32_t adc_raw_values[NUMBER_OF_ADC_CHANNLES];
+
+
 /* USER CODE END 0 */
 
 ADC_HandleTypeDef hadc1;
@@ -136,7 +138,9 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* adcHandle)
 } 
 
 /* USER CODE BEGIN 1 */
-
+uint32_t* get_raw_adc_data(void){
+	return adc_raw_values;
+}
 /* USER CODE END 1 */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

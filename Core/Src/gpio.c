@@ -130,7 +130,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 		return;
 	}
 
-
 	if(GPIO_Pin == LATT_LOW_LIMIT_ACTUATOR_Pin){
 		hal_pins_handlers.low_limit_activated_handler();
 	}else
@@ -138,8 +137,20 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 		hal_pins_handlers.high_limit_activated_handler();
 	}
 
-
 }
+
+bool is_actuator_low_limit_active(void){
+	//todo Lukas: check logic
+	return !HAL_GPIO_ReadPin(LATT_LOW_LIMIT_ACTUATOR_GPIO_Port,
+			LATT_LOW_LIMIT_ACTUATOR_Pin);
+}
+
+bool is_actuator_high_limit_active(void){
+	//todo Lukas check logic
+	return !HAL_GPIO_ReadPin(LATT_HIGH_LIMIT_ACTUATOR_GPIO_Port,
+			LATT_HIGH_LIMIT_ACTUATOR_Pin);
+}
+
 /* USER CODE END 2 */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

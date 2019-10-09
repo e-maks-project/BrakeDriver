@@ -34,6 +34,8 @@ extern TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN Private defines */
 #define NUMBER_OF_ENCODERS  4
+#define PWM1_CHANNEL        3
+#define PWM2_CHANNEL		4
 
 typedef struct{
 	void (*set_slip_pwm) (uint16_t);
@@ -42,7 +44,9 @@ typedef struct{
 /* USER CODE END Private defines */
 
 void MX_TIM3_Init(void);
-
+                        
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
+                    
 /* USER CODE BEGIN Prototypes */
 typedef struct {
 	volatile uint16_t pulse_count;
@@ -55,7 +59,9 @@ typedef struct{
 	uint8_t number_of_encoders;
 }hal_encoders;
 
-static hal_encoder defined_encoders[NUMBER_OF_ENCODERS];
+void hal_set_forward_pwm(uint16_t pwm_in_percents);
+void hal_set_backward_pwm(uint16_t pwm_in_percents);
+void hal_reset_pwms(void);
 
 /* USER CODE END Prototypes */
 

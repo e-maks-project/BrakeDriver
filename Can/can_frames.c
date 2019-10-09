@@ -44,12 +44,15 @@ void decode_joy_data(uint32_t frame_id, uint8_t* data, uint8_t dlc){
 		uint16_t joy_data = decode_uint8_to_uint16(data,2);
 		joy.is_data_new = TRUE;
 		joy.data = decode_uint16_to_float(joy_data,uint16_5_5);
+
 	}
 }
+
 //todo Lukas place it after brakes controll function
 void reset_joy_data(void){
 	joy.is_data_new = FALSE;
 }
+
 
 joy_data* get_joy_data(void){
 
@@ -60,7 +63,3 @@ joy_data* get_joy_data(void){
 void send_test_frame(void){
 	hardware_can.can_transmit(0x0F0, 4, (uint8_t[]){0xDE, 0xAD, 0xBE, 0xEF});
 }
-
-//todo Lukas think out how to test it
-
-

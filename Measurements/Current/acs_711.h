@@ -21,13 +21,11 @@ typedef struct{
 }data;
 
 typedef struct{
-	uint8_t  is_fault;
+	bool is_fault;
 	data voltage;
 	data current;
 }current_measurement;
 
 current_measurement* get_current_ptr(void);
-float decode_voltage(uint32_t encoded_voltage);
-float decode_current(float voltage);
 void calculate_current(void);
 #endif /* CURRENT_ACS_711_H_ */

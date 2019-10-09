@@ -21,6 +21,7 @@ Additionally, if you want to see live variables, you can  download [stmstudio](h
 * Debug - debug data, .elf files are stored here.
 * Drivers - CMSIS and board specific HAL drivers
 * Startup - stm32 boot file
+* Test  - unit tests done with ceedling framework
 ### Files
 * brake_driver.* - main program files
 * .project - eclipse project configuration file

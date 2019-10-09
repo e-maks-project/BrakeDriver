@@ -16,13 +16,21 @@
 #define NOMINAL_LOAD	45 // Kg
 #define NO_LOAD_CURRENT	0,5// A
 
-typedef struct{
-	uint16_t speed_value_encoded;
-	float speed_value_decoded;
-	bool is_max_lenght_reached;
-	bool is_min_lenght_reached;
-}actuator_parameters;
-extern actuator_parameters latt;
+typedef enum{
+	move_forward,
+	move_backward
+}latt_move_direction;
+typedef struct {
+	void (*set_speed_forward)(uint16_t);
+	void (*set_speed_backward)(uint16_t);
+	bool (*is_piston_retracted)(void);
+	bool (*is_piston_extended)(void);
+	void (*stop_latt)(void);
+}latt_function ;
 
+
+latt_function* get_latt_function_pointers(void);
+void init_latt_driver(void);
+void set_latt_speed(latt_move_direction direction, float speed);
 
 #endif /* ACTUATOR_LATT_H_ */

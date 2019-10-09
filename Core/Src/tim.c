@@ -35,10 +35,10 @@ void MX_TIM3_Init(void)
   TIM_OC_InitTypeDef sConfigOC = {0};
 
   htim3.Instance = TIM3;
-  htim3.Init.Prescaler = 64;
+  htim3.Init.Prescaler = 72;
   htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim3.Init.Period = 1000;
-  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV2;
   htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
   if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
   {
@@ -143,11 +143,11 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
 /* USER CODE BEGIN 1 */
 //set forward speed
 //set backward speed
-void hal_set_pwm( uint32_t channel,uint16_t pulse){
+void hal_set_pwm( uint32_t channel,uint16_t pulse ){
 	if (channel == PWM1_CHANNEL)
-		TIM3->CCR3 =800;
+		TIM3->CCR3 =pulse;
 	else{
-		TIM3->CCR4 = 800;
+		TIM3->CCR4 = pulse;
 	}
 }
 

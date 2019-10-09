@@ -79,9 +79,9 @@ void hal_init(void){
 	// todo Lukas:  call HAL_Start... functions
 	HAL_ADC_Start_DMA(&hadc1,adc_raw_values, NUMBER_OF_ADC_CHANNLES);
 	HAL_TIM_Base_Start(&htim3);
-	HAL_TIM_PWM_Start(&htim3, 3);
-	HAL_TIM_PWM_Start(&htim3, 4);
-	hal_can_filter_init();
+	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3);
+	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_4);
+	//hal_can_filter_init();
 	HAL_CAN_Start(&hcan);
 
 }

@@ -32,15 +32,15 @@ static void turn_on_brakes(void){
 	if(!brake.is_brake_open){
 		set_latt_speed(move_forward, 80);// 80% PWM
 	}else{
-		set_latt_speed(move_forward,0);
+		set_latt_speed(move_backward,0);
 	}
 }
 
 static void turn_off_brakes(void){
-	if(!brake.is_brake_open){
+	if(!brake.is_brake_closed){
 		set_latt_speed(move_backward, 80);// 80% PWM
 	}else{
-		set_latt_speed(move_backward,0);
+		set_latt_speed(move_forward,0);
 	}
 
 }

@@ -13,16 +13,18 @@ extern TIM_HandleTypeDef htim3;
 int main(void){
 	hal_init();
 	init_latt_driver();
-	float speed = 0;
+	float speed =0 ;
 	while(1){
 		if (htim3.Instance->CNT == 300){
-			if(get_joy_data()->is_data_new){
-				control_brakes(speed);
-			}
-			printf("can_sending...\n");
-			send_test_frame();
-			printf("can sent \n");
-			printf("\n\n");
+				//control_brakes(speed);
+				set_latt_speed(move_forward,80);
+				set_latt_speed(move_backward,80);
+				printf("can_sending...\n");
+				send_test_frame();
+				printf("can sent \n");
+				printf("\n\n");
+
+
 
 			// set speed cording to can frames
 

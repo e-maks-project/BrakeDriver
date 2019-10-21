@@ -35,7 +35,7 @@ void MX_CAN_Init(void)
 {
 
   hcan.Instance = CAN1;
-  hcan.Init.Prescaler = 2;
+  hcan.Init.Prescaler = 7;
   hcan.Init.Mode = CAN_MODE_NORMAL;
   hcan.Init.SyncJumpWidth = CAN_SJW_2TQ;
   hcan.Init.TimeSeg1 = CAN_BS1_2TQ;
@@ -116,8 +116,7 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
 
 /* USER CODE BEGIN 1 */
 
-void HAL_CAN_RxFifo0MsgPendingCallback (CAN_HandleTypeDef* hcan ){
-	//todo Lukas : here only reference to app layer interrupt handler.
+void HAL_CAN_RxFifo1MsgPendingCallback (CAN_HandleTypeDef* hcan ){
 	HAL_CAN_GetRxMessage(hcan,CAN_RX_FIFO0,
 			&can_messages.rx_header,
 			can_messages.rx_data );

@@ -23,6 +23,10 @@ typedef enum{
 typedef struct {
 	void (*set_speed_forward)(uint16_t);
 	void (*set_speed_backward)(uint16_t);
+	void (*set_enable_1_backward)(void);
+	void (*set_enable_2_forward)(void);
+	void (*reset_enable_1_backward)(void);
+	void (*reset_enable_2_forward)(void);
 	bool (*is_piston_retracted)(void);
 	bool (*is_piston_extended)(void);
 	void (*stop_latt)(void);

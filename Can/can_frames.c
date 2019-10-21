@@ -8,7 +8,7 @@
 #include <math.h>
 #include "can_frames.h"
 #include "coder.h"
-can_rx_interrupt_handler hal_can_rx={
+extern can_rx_interrupt_handler hal_can_rx={
 		.process_message =decode_joy_data
 };
 

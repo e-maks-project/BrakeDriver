@@ -75,10 +75,10 @@ void Error_Handler(void);
 #define LATT_HIGH_LIMIT_ACTUATOR_Pin GPIO_PIN_7
 #define LATT_HIGH_LIMIT_ACTUATOR_GPIO_Port GPIOA
 #define LATT_HIGH_LIMIT_ACTUATOR_EXTI_IRQn EXTI9_5_IRQn
-#define ENCODER_2_A_PWM_Pin GPIO_PIN_0
-#define ENCODER_2_A_PWM_GPIO_Port GPIOB
-#define ENCODER_2_B_PWM_Pin GPIO_PIN_1
-#define ENCODER_2_B_PWM_GPIO_Port GPIOB
+#define Enable1_Pin GPIO_PIN_7
+#define Enable1_GPIO_Port GPIOC
+#define Enable2_Pin GPIO_PIN_8
+#define Enable2_GPIO_Port GPIOC
 /* USER CODE BEGIN Private defines */
 #define EXTI_LOW_LIMIT_SWITCH_PIN_INDEX  6
 #define EXTI_HIGH_LIMIT_SWITCH_PIN_INDEX 7

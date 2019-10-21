@@ -5,6 +5,7 @@
  *      Author: Lukas
  */
 #include "latt.h"
+#include "gpio.h"
 
 extern pins_irq_handlers hal_pins_handlers;
 
@@ -15,7 +16,11 @@ static latt_function latt ={
 		.set_speed_forward = hal_set_forward_pwm,
 		.set_speed_backward = hal_set_backward_pwm,
 		.is_piston_retracted = is_actuator_low_limit_active,
-		.is_piston_extended = is_actuator_high_limit_active
+		.is_piston_extended = is_actuator_high_limit_active,
+		.set_enable_1_backward = set_enable_1,
+		.set_enable_2_forward  = set_enable_2,
+		.reset_enable_1_backward = reset_enable_1,
+		.reset_enable_2_forward = reset_enable_2
 };
 
 static void max_length_reached(void){
@@ -52,8 +57,12 @@ void set_latt_speed(latt_move_direction direction, float speed){
 
 	if(direction == move_forward){
 		set_forward_speed(speed);
+		latt.reset_enable_1_backward();
+		latt.set_enable_2_forward();
 	}else{
 		set_backward_speed(speed);
+		latt.reset_enable_2_forward();
+		latt.set_enable_1_backward();
 	}
 }
 

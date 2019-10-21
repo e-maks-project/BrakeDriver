@@ -20,14 +20,18 @@ typedef enum{
 	move_forward,
 	move_backward
 }latt_move_direction;
-
-typedef struct{
+typedef struct {
 	void (*set_speed_forward)(uint16_t);
 	void (*set_speed_backward)(uint16_t);
+	void (*set_enable_1_backward)(void);
+	void (*set_enable_2_forward)(void);
+	void (*reset_enable_1_backward)(void);
+	void (*reset_enable_2_forward)(void);
 	bool (*is_piston_retracted)(void);
 	bool (*is_piston_extended)(void);
 	void (*stop_latt)(void);
 }latt_function ;
+
 
 latt_function* get_latt_function_pointers(void);
 void init_latt_driver(void);

@@ -38,6 +38,8 @@ typedef struct {
 }pins_irq_handlers;
 
 
+
+
 /* USER CODE END Private defines */
 
 void MX_GPIO_Init(void);
@@ -46,6 +48,10 @@ void MX_GPIO_Init(void);
 
 bool is_actuator_low_limit_active(void);
 bool is_actuator_high_limit_active(void);
+void set_enable_1(void);
+void set_enable_2(void);
+void reset_enable_1(void);
+void reset_enable_2(void);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

@@ -22,8 +22,8 @@
 
 /* USER CODE BEGIN 0 */
 CAN_FilterTypeDef hcan_filter;
-hal_can_messages can_messages;
-uint32_t mailbox;
+static hal_can_messages can_messages;
+static uint32_t mailbox;
 can_rx_interrupt_handler hal_can_rx;
 
 /* USER CODE END 0 */
@@ -35,7 +35,7 @@ void MX_CAN_Init(void)
 {
 
   hcan.Instance = CAN1;
-  hcan.Init.Prescaler = 2;
+  hcan.Init.Prescaler = 7;
   hcan.Init.Mode = CAN_MODE_NORMAL;
   hcan.Init.SyncJumpWidth = CAN_SJW_2TQ;
   hcan.Init.TimeSeg1 = CAN_BS1_2TQ;
@@ -116,8 +116,7 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
 
 /* USER CODE BEGIN 1 */
 
-void HAL_CAN_RxFifo0MsgPendingCallback (CAN_HandleTypeDef* hcan ){
-	//todo Lukas : here only reference to app layer interrupt handler.
+void HAL_CAN_RxFifo1MsgPendingCallback (CAN_HandleTypeDef* hcan ){
 	HAL_CAN_GetRxMessage(hcan,CAN_RX_FIFO0,
 			&can_messages.rx_header,
 			can_messages.rx_data );
@@ -140,19 +139,14 @@ void hal_can_filter_init(void){
 	HAL_CAN_ConfigFilter(&hcan,&hcan_filter);
 }
 
-
 void hal_can_send(uint16_t frame_id, uint8_t dlc, uint8_t* data){
 	can_messages.tx_data = data;
 	can_messages.tx_header.DLC = dlc;
 	can_messages.tx_header.RTR = CAN_RTR_DATA;
 	can_messages.tx_header.IDE  = CAN_ID_STD;
 	can_messages.tx_header.StdId = frame_id;
-	uint16_t a =0;
-	while(HAL_CAN_AddTxMessage(&hcan, &(can_messages.tx_header),can_messages.tx_data,&(can_messages.mailbox)) == HAL_ERROR){
-		a++;
-	}
+	HAL_CAN_AddTxMessage(&hcan, &(can_messages.tx_header),can_messages.tx_data,&(can_messages.mailbox));
 }
-
 /* USER CODE END 1 */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

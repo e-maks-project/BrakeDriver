@@ -36,10 +36,6 @@ extern CAN_HandleTypeDef hcan;
 #define CAN_FRAMES_ID_LOW			0x20D
 #define CAN_FRAMES_ID_HIGH			0x24D
 
-#define USER_INTERFACE_X_AXIS_FRAME  0x21D
-#define USER_INTERFACE_Y_AXIS_FRAME  0X22D
-#define USER_INTERFACE_DLC			 4
-
 typedef struct{
 	void(*process_message)(uint32_t, uint8_t*, uint8_t);
 	uint8_t* received_data;
@@ -59,7 +55,7 @@ void MX_CAN_Init(void);
 
 /* USER CODE BEGIN Prototypes */
 void hal_can_send(uint16_t frame_id, uint8_t dlc, uint8_t* data);
-extern can_rx_interrupt_handler hal_can_rx;
+
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

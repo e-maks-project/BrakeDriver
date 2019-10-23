@@ -116,7 +116,7 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
 
 /* USER CODE BEGIN 1 */
 
-void HAL_CAN_RxFifo1MsgPendingCallback (CAN_HandleTypeDef* hcan ){
+void HAL_CAN_RxFifo0MsgPendingCallback (CAN_HandleTypeDef* hcan ){
 	HAL_CAN_GetRxMessage(hcan,CAN_RX_FIFO0,
 			&can_messages.rx_header,
 			can_messages.rx_data );

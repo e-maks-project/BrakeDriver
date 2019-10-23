@@ -212,21 +212,23 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
 //set forward speed
 //set backward speed
 void hal_set_pwm( uint32_t channel,uint16_t pulse ){
-	if (channel == PWM1_CHANNEL)
+	if (channel == PWM1_CHANNEL){
+		//backward
 		TIM1->CCR2 = pulse;
-	else{
+		TIM1->CCR3 = 0;
+	}else{
+		//forward
+		TIM1->CCR2 = 0;
 		TIM1->CCR3 = pulse;
 	}
 }
 
-void hal_set_forward_pwm(uint16_t pwm_in_percents){
+void hal_set_pwm_1(uint16_t pwm_in_percents){
 	hal_set_pwm(PWM1_CHANNEL, pwm_in_percents *10);
-	hal_set_pwm(PWM2_CHANNEL,0);
 }
 
-void hal_set_backward_pwm(uint16_t pwm_in_percents){
+void hal_set_pwm_2(uint16_t pwm_in_percents){
 	hal_set_pwm(PWM2_CHANNEL,pwm_in_percents*10);
-	hal_set_pwm(PWM1_CHANNEL,0);
 }
 
 void hal_reset_pwms(void){

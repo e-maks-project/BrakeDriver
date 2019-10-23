@@ -11,14 +11,17 @@
 extern TIM_HandleTypeDef htim3;
 
 int main(void){
-	hal_init();
+ 	hal_init();
 	init_latt_driver();
 	float speed =0 ;
 	while(1){
 		if (htim3.Instance->CNT == 300){
 				//control_brakes(speed);
-				set_latt_speed(move_forward,80);
-				set_latt_speed(move_backward,80);
+				set_latt_speed(move_forward,100);
+				HAL_Delay(5000);
+				set_latt_speed(move_backward,100);
+				HAL_Delay(5000);
+
 				printf("can_sending...\n");
 				send_test_frame();
 				printf("can sent \n");

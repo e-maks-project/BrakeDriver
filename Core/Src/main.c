@@ -87,6 +87,9 @@ void hal_init(void){
 	hal_can_filter_init();
 	HAL_CAN_Start(&hcan);
 
+	set_enable_1();
+	//set_enable_2();
+
 }
 /* USER CODE END 0 */
 

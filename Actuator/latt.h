@@ -17,16 +17,16 @@
 #define NO_LOAD_CURRENT	0,5// A
 
 typedef enum{
-	move_forward,
-	move_backward
+	move_backward,
+	move_forward
 }latt_move_direction;
 typedef struct {
 	void (*set_speed_forward)(uint16_t);
 	void (*set_speed_backward)(uint16_t);
-	void (*set_enable_1_backward)(void);
-	void (*set_enable_2_forward)(void);
-	void (*reset_enable_1_backward)(void);
-	void (*reset_enable_2_forward)(void);
+	void (*set_enable_backward)(void);
+	void (*set_enable_forward)(void);
+	void (*reset_enable_backward)(void);
+	void (*reset_enable_forward)(void);
 	bool (*is_piston_retracted)(void);
 	bool (*is_piston_extended)(void);
 	void (*stop_latt)(void);

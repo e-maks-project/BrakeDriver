@@ -35,8 +35,8 @@ extern TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN Private defines */
 #define NUMBER_OF_ENCODERS  4
-#define PWM1_CHANNEL        3
-#define PWM2_CHANNEL		4
+#define PWM1_CHANNEL        2
+#define PWM2_CHANNEL		3
 
 typedef struct{
 	void (*set_slip_pwm) (uint16_t);
@@ -61,8 +61,8 @@ typedef struct{
 	uint8_t number_of_encoders;
 }hal_encoders;
 
-void hal_set_forward_pwm(uint16_t pwm_in_percents);
-void hal_set_backward_pwm(uint16_t pwm_in_percents);
+void hal_set_pwm_1(uint16_t pwm_in_percents);
+void hal_set_pwm_2(uint16_t pwm_in_percents);
 void hal_reset_pwms(void);
 
 /* USER CODE END Prototypes */

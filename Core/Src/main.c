@@ -57,6 +57,7 @@ uint32_t adc_raw_values[NUMBER_OF_ADC_CHANNLES];
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+static void MX_NVIC_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -74,21 +75,16 @@ void hal_init(void){
 	MX_ADC1_Init();
 	MX_I2C2_Init();
 	MX_TIM1_Init();
-	MX_TIM3_Init();
-
 	MX_CAN_Init();
+	MX_NVIC_Init();
 
 	// todo Lukas:  call HAL_Start... functions
 	HAL_ADC_Start_DMA(&hadc1,adc_raw_values, NUMBER_OF_ADC_CHANNLES);
-	HAL_TIM_Base_Start(&htim3);
 	HAL_TIM_Base_Start(&htim1);
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
-	hal_can_filter_init();
 	HAL_CAN_Start(&hcan);
-
-	set_enable_1();
-	//set_enable_2();
+	HAL_NVIC_EnableIRQ(CAN1_RX1_IRQn);
 
 }
 /* USER CODE END 0 */
@@ -139,6 +135,23 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief NVIC Configuration.
+  * @retval None
+  */
+static void MX_NVIC_Init(void)
+{
+  /* DMA1_Channel1_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Channel1_IRQn, 3, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Channel1_IRQn);
+  /* DMA1_Channel5_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Channel5_IRQn, 2, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Channel5_IRQn);
+  /* CAN1_RX1_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(CAN1_RX1_IRQn, 1, 0);
+  HAL_NVIC_EnableIRQ(CAN1_RX1_IRQn);
 }
 
 /* USER CODE BEGIN 4 */

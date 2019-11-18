@@ -15,6 +15,6 @@ typedef struct{
 	bool is_brake_closed;
 }brake_status;
 
-void control_brakes(float speed);
+void control_brakes(uint8_t joy_direction);
 bool are_brakes_turned_on(void);
 #endif /* ACTUATOR_BRAKES_H_ */

@@ -55,7 +55,7 @@ void MX_CAN_Init(void);
 
 /* USER CODE BEGIN Prototypes */
 void hal_can_send(uint16_t frame_id, uint8_t dlc, uint8_t* data);
-
+void test_get_rx_message(void);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

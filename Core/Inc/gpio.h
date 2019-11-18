@@ -48,10 +48,7 @@ void MX_GPIO_Init(void);
 
 bool is_actuator_low_limit_active(void);
 bool is_actuator_high_limit_active(void);
-void set_enable_1(void);
-void set_enable_2(void);
-void reset_enable_1(void);
-void reset_enable_2(void);
+void set_motor_dir_pin(bool state);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

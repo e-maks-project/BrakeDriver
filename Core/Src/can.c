@@ -70,19 +70,16 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
     PA11     ------> CAN_RX
     PA12     ------> CAN_TX 
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_11;
+    GPIO_InitStruct.Pin = CAN_RX_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+    GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+    HAL_GPIO_Init(CAN_RX_GPIO_Port, &GPIO_InitStruct);
 
-    GPIO_InitStruct.Pin = GPIO_PIN_12;
+    GPIO_InitStruct.Pin = CAN_TX_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+    HAL_GPIO_Init(CAN_TX_GPIO_Port, &GPIO_InitStruct);
 
-    /* CAN1 interrupt Init */
-    HAL_NVIC_SetPriority(CAN1_RX1_IRQn, 0, 0);
-    HAL_NVIC_EnableIRQ(CAN1_RX1_IRQn);
   /* USER CODE BEGIN CAN1_MspInit 1 */
 
   /* USER CODE END CAN1_MspInit 1 */
@@ -104,7 +101,7 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
     PA11     ------> CAN_RX
     PA12     ------> CAN_TX 
     */
-    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_11|GPIO_PIN_12);
+    HAL_GPIO_DeInit(GPIOA, CAN_RX_Pin|CAN_TX_Pin);
 
     /* CAN1 interrupt Deinit */
     HAL_NVIC_DisableIRQ(CAN1_RX1_IRQn);
@@ -115,6 +112,13 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
 } 
 
 /* USER CODE BEGIN 1 */
+void test_get_rx_message(void){
+	HAL_CAN_GetRxMessage(&hcan,CAN_RX_FIFO1,
+				&can_messages.rx_header,
+				can_messages.rx_data );
+	printf("data\n");
+}
+
 
 void HAL_CAN_RxFifo0MsgPendingCallback (CAN_HandleTypeDef* hcan ){
 	HAL_CAN_GetRxMessage(hcan,CAN_RX_FIFO0,
@@ -128,11 +132,9 @@ void HAL_CAN_RxFifo0MsgPendingCallback (CAN_HandleTypeDef* hcan ){
 
 void hal_can_filter_init(void){
 	hcan_filter.FilterFIFOAssignment = CAN_FILTER_FIFO0;
-	hcan_filter.FilterIdHigh = 0xFFFF;
 	//filter only user interface frames
 	hcan_filter.FilterIdLow = CAN_FRAMES_ID_LOW;
 	hcan_filter.FilterIdHigh = CAN_FRAMES_ID_HIGH;
-	hcan_filter.FilterIdLow = 0x0;
 	hcan_filter.FilterScale = CAN_FILTERSCALE_32BIT;
 	hcan_filter.FilterActivation = ENABLE;
 

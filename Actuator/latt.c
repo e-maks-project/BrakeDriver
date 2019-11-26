@@ -39,7 +39,7 @@ void set_latt_speed(latt_move_direction direction, float speed){
 		set_forward_speed(speed);
 }
 void stop_latt(void){
-
+	latt.set_speed(0);
 }
 
 void init_latt_driver(void){

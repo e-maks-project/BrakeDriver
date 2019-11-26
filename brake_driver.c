@@ -15,10 +15,9 @@ int main(void){
 	init_latt_driver();
 	float speed =0 ;
 	while(1){
-		if(get_joy_data()->is_data_new){
-			control_brakes(get_joy_data()->data);
+		HAL_Delay(10000);
+			control_brakes(get_joy_data()->direction);
 			reset_joy_data();
-		}
 
 		/* tests
 			set_latt_speed(move_forward,100);

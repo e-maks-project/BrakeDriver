@@ -33,8 +33,8 @@ typedef struct{
 }can_message;
 
 typedef struct{
-	bool is_data_new;
 	float data;
+	uint8 direction;
 }joy_data;
 
 extern can_functions hardware_can;

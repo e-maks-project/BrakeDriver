@@ -41,16 +41,16 @@ void decode_joy_data(uint32_t frame_id, uint8_t* data, uint8_t dlc){
 	// write tests for it
 	if(frame_id == USER_INTERFACE_X_AXIS_FRAME){
 		send_confirmation(data,dlc);
-		uint16_t joy_data = decode_uint8_to_uint16(data,2);
-		joy.is_data_new = TRUE;
+		uint16_t joy_data = decode_uint8_to_uint16(data,0);
+		joy.direction =decode_uint8_to_uint16(data,2);
 		joy.data = decode_uint16_to_float(joy_data,uint16_5_5);
-
 	}
 }
 
 //todo Lukas place it after brakes controll function
 void reset_joy_data(void){
 	joy.is_data_new = FALSE;
+	joy.data = 0.0;
 }
 
 

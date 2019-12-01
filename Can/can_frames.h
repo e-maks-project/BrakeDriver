@@ -34,7 +34,7 @@ typedef struct{
 
 typedef struct{
 	float data;
-	uint8 direction;
+	uint8_t direction;
 }joy_data;
 
 extern can_functions hardware_can;

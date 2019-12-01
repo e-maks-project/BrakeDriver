@@ -13,7 +13,6 @@ extern can_rx_interrupt_handler hal_can_rx={
 };
 
 static joy_data joy ={
-		.is_data_new = FALSE,
 		.data = 0.0
 };
 
@@ -49,7 +48,6 @@ void decode_joy_data(uint32_t frame_id, uint8_t* data, uint8_t dlc){
 
 //todo Lukas place it after brakes controll function
 void reset_joy_data(void){
-	joy.is_data_new = FALSE;
 	joy.data = 0.0;
 }
 

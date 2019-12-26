@@ -23,7 +23,6 @@
 /* USER CODE BEGIN 0 */
 CAN_FilterTypeDef hcan_filter;
 static hal_can_messages can_messages;
-static uint32_t mailbox;
 can_rx_interrupt_handler hal_can_rx;
 
 /* USER CODE END 0 */
@@ -42,7 +41,7 @@ void MX_CAN_Init(void)
   hcan.Init.TimeSeg2 = CAN_BS2_1TQ;
   hcan.Init.TimeTriggeredMode = DISABLE;
   hcan.Init.AutoBusOff = DISABLE;
-  hcan.Init.AutoWakeUp = DISABLE;
+  hcan.Init.AutoWakeUp = ENABLE;
   hcan.Init.AutoRetransmission = ENABLE;
   hcan.Init.ReceiveFifoLocked = DISABLE;
   hcan.Init.TransmitFifoPriority = DISABLE;
@@ -72,7 +71,7 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
     */
     GPIO_InitStruct.Pin = CAN_RX_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-    GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+    GPIO_InitStruct.Pull = GPIO_PULLUP;
     HAL_GPIO_Init(CAN_RX_GPIO_Port, &GPIO_InitStruct);
 
     GPIO_InitStruct.Pin = CAN_TX_Pin;
@@ -81,6 +80,7 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
     HAL_GPIO_Init(CAN_TX_GPIO_Port, &GPIO_InitStruct);
 
   /* USER CODE BEGIN CAN1_MspInit 1 */
+    HAL_CAN_ActivateNotification(&hcan,CAN_IT_RX_FIFO0_MSG_PENDING);
 
   /* USER CODE END CAN1_MspInit 1 */
   }
@@ -104,6 +104,7 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
     HAL_GPIO_DeInit(GPIOA, CAN_RX_Pin|CAN_TX_Pin);
 
     /* CAN1 interrupt Deinit */
+    HAL_NVIC_DisableIRQ(USB_HP_CAN1_TX_IRQn);
     HAL_NVIC_DisableIRQ(CAN1_RX1_IRQn);
   /* USER CODE BEGIN CAN1_MspDeInit 1 */
 
@@ -113,15 +114,17 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
 
 /* USER CODE BEGIN 1 */
 void test_get_rx_message(void){
-	HAL_CAN_GetRxMessage(&hcan,CAN_RX_FIFO1,
+    uint32_t	fifo = HAL_CAN_GetRxFifoFillLevel(&hcan, CAN_RX_FIFO0) ;
+	HAL_CAN_GetRxMessage(&hcan,CAN_RX_FIFO0,
 				&can_messages.rx_header,
 				can_messages.rx_data );
 	printf("data\n");
 }
 
 
-void HAL_CAN_RxFifo0MsgPendingCallback (CAN_HandleTypeDef* hcan ){
-	HAL_CAN_GetRxMessage(hcan,CAN_RX_FIFO0,
+void HAL_CAN_RxFifo0MsgPendingCallback (CAN_HandleTypeDef* can ){
+
+	HAL_CAN_GetRxMessage(can,CAN_RX_FIFO0,
 			&can_messages.rx_header,
 			can_messages.rx_data );
 	hal_can_rx.process_message(can_messages.rx_header.StdId,
@@ -147,7 +150,7 @@ void hal_can_send(uint16_t frame_id, uint8_t dlc, uint8_t* data){
 	can_messages.tx_header.RTR = CAN_RTR_DATA;
 	can_messages.tx_header.IDE  = CAN_ID_STD;
 	can_messages.tx_header.StdId = frame_id;
-	HAL_CAN_AddTxMessage(&hcan, &(can_messages.tx_header),can_messages.tx_data,&(can_messages.mailbox));
+	while(HAL_CAN_AddTxMessage(&hcan, &(can_messages.tx_header),can_messages.tx_data,&(can_messages.mailbox))!= HAL_OK);
 }
 /* USER CODE END 1 */
 

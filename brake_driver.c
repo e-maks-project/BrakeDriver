@@ -15,19 +15,14 @@ int main(void){
 	init_latt_driver();
 	float speed =0 ;
 	while(1){
+		/*
 		HAL_Delay(10000);
 			control_brakes(get_joy_data()->direction);
 			reset_joy_data();
-
-		/* tests
-			set_latt_speed(move_forward,100);
-				HAL_Delay(5000);
-				set_latt_speed(move_backward,100);
-				HAL_Delay(5000);
-
+         */
+			HAL_Delay(5000);
 			send_test_frame();
 			test_get_rx_message();
-			*/
-		}
+	}
 
 }

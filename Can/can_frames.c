@@ -16,7 +16,7 @@ static joy_data joy ={
 		.data = 0.0
 };
 
-static can_message messages[]={
+static can_message messages[2]={
 		{.frame_id = USER_INTERFACE_X_AXIS_FRAME ,.dlc = USER_INTERFACE_DLC},
 		{.frame_id = CONFIRMATION_FRAME_ID, .dlc = CONFIRMATION_FRAME_DLC}
 };

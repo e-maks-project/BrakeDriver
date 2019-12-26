@@ -30,18 +30,10 @@
     - +:test/**
     - -:test/support
   :source:
-<<<<<<< HEAD
-    - ../
-    - HardwareMock/**
-    - ../Measurements/**
-    - ../Actuator/**
-    - ../Can
-=======
-    - HardwareMocks/
+    - HardwareMocks/**
     - ../Measurements/**
     - ../Can/**
     - ../Actuator/**
->>>>>>> develop
   :support:
     - test/support
 

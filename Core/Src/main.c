@@ -84,7 +84,13 @@ void hal_init(void){
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
 	HAL_CAN_Start(&hcan);
-	HAL_NVIC_EnableIRQ(CAN1_RX1_IRQn);
+	hal_can_filter_init();
+
+	if (HAL_CAN_ActivateNotification(&hcan, CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK)
+	{
+	    /* Notification Error */
+	   Error_Handler();
+	}
 
 }
 /* USER CODE END 0 */
@@ -149,8 +155,11 @@ static void MX_NVIC_Init(void)
   /* DMA1_Channel5_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Channel5_IRQn, 2, 0);
   HAL_NVIC_EnableIRQ(DMA1_Channel5_IRQn);
+  /* USB_HP_CAN1_TX_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(USB_HP_CAN1_TX_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(USB_HP_CAN1_TX_IRQn);
   /* CAN1_RX1_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(CAN1_RX1_IRQn, 1, 0);
+  HAL_NVIC_SetPriority(CAN1_RX1_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(CAN1_RX1_IRQn);
 }
 

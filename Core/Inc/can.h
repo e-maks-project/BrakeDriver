@@ -46,7 +46,7 @@ typedef struct{
 	CAN_RxHeaderTypeDef	    rx_header;
 	uint32_t 				mailbox;
 	uint8_t*				tx_data;
-	uint8_t*				rx_data;
+	uint8_t				    rx_data[8];
 }hal_can_messages;
 
 /* USER CODE END Private defines */

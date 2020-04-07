@@ -8,9 +8,6 @@
 #include <math.h>
 #include "can_frames.h"
 #include "coder.h"
-extern can_rx_interrupt_handler hal_can_rx={
-		.process_message =decode_joy_data
-};
 
 static joy_data joy ={
 		.data = 0.0
@@ -22,7 +19,8 @@ static can_message messages[2]={
 };
 
 can_functions hardware_can= {
-		.can_transmit = hal_can_send
+		.can_transmit = hal_can_send,
+		.can_receive = get_rx_message
  };
 
 static uint16_t decode_uint8_to_uint16(uint8_t* data, uint8_t start_byte){
@@ -36,6 +34,12 @@ static void send_confirmation(uint8_t* data, uint8_t length){
 		hardware_can.can_transmit(messages[1].frame_id,messages[1].dlc,messages[1].data);
 	}
 }
+void receive_raw_can__data(uint16_t* received_id, uint8_t* received_data){
+	hardware_can.can_receive(received_id,received_data );
+
+}
+
+
 void decode_joy_data(uint32_t frame_id, uint8_t* data, uint8_t dlc){
 	// write tests for it
 	if(frame_id == USER_INTERFACE_X_AXIS_FRAME){
@@ -51,13 +55,13 @@ void reset_joy_data(void){
 	joy.data = 0.0;
 }
 
-
 joy_data* get_joy_data(void){
 
 	return &joy;
 }
 
 //for tests purposes
+// 0xDEADBEEF
 void send_test_frame(void){
 	hardware_can.can_transmit(0x0F0, 4, (uint8_t[]){0xDE, 0xAD, 0xBE, 0xEF});
 }

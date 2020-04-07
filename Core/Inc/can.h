@@ -37,11 +37,6 @@ extern CAN_HandleTypeDef hcan;
 #define CAN_FRAMES_ID_HIGH			0x24D
 
 typedef struct{
-	void(*process_message)(uint32_t, uint8_t*, uint8_t);
-	uint8_t* received_data;
-}can_rx_interrupt_handler;
-
-typedef struct{
 	CAN_TxHeaderTypeDef     tx_header;
 	CAN_RxHeaderTypeDef	    rx_header;
 	uint32_t 				mailbox;
@@ -55,7 +50,7 @@ void MX_CAN_Init(void);
 
 /* USER CODE BEGIN Prototypes */
 void hal_can_send(uint16_t frame_id, uint8_t dlc, uint8_t* data);
-void test_get_rx_message(void);
+void get_rx_message(uint16_t* address, uint8_t* data);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

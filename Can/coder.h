@@ -10,6 +10,16 @@
 #include <math.h>
 #include <malloc.h>
 
+/*
+ * float decode_uint16_to_floatu(uint8_t* data, uint8_t* data_length)
+ * fukncja dekoduje tablice uint8 na zmienna float
+ * data(uint8*) - dane wejsciowe
+ * parameter - parameter kodowania zgodny z can protocolem E-maks
+ *
+ */
+
+
+
 /* type defines for ceedling tests*/
 #include "adc.h"
 
@@ -21,7 +31,7 @@ typedef struct{
 
 uint16_t encode_float_to_uint16(float value, coding_parameter param);
 uint8_t* encode_frame_big_endian(uint8_t* data , uint8_t data_length);
-uint16_t* decode_fame_to_uint16(uint8_t* data, uint8_t* data_length);
+uint16_t* decode_fame_to_uint16(uint8_t* data, uint8_t data_length);
 float decode_uint16_to_float(uint16_t data, coding_parameter parameter);
 
 extern coding_parameter uint16_5_5;

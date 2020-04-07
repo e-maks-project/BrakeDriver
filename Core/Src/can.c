@@ -23,7 +23,6 @@
 /* USER CODE BEGIN 0 */
 CAN_FilterTypeDef hcan_filter;
 static hal_can_messages can_messages;
-can_rx_interrupt_handler hal_can_rx;
 
 /* USER CODE END 0 */
 
@@ -113,23 +112,23 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
 } 
 
 /* USER CODE BEGIN 1 */
-void test_get_rx_message(void){
-    uint32_t	fifo = HAL_CAN_GetRxFifoFillLevel(&hcan, CAN_RX_FIFO0) ;
+void get_rx_message(uint16_t* address, uint8_t* data){
+    //uint32_t	fifo = HAL_CAN_GetRxFifoFillLevel(&hcan, CAN_RX_FIFO0) ;
 	HAL_CAN_GetRxMessage(&hcan,CAN_RX_FIFO0,
 				&can_messages.rx_header,
 				can_messages.rx_data );
-	printf("data\n");
+
+	*address = can_messages.rx_header.StdId;
+	data = can_messages.rx_data;
 }
 
 
 void HAL_CAN_RxFifo0MsgPendingCallback (CAN_HandleTypeDef* can ){
 
+	// do tej pory nie uda³o mi siê uruchomic przerwania :(
 	HAL_CAN_GetRxMessage(can,CAN_RX_FIFO0,
 			&can_messages.rx_header,
 			can_messages.rx_data );
-	hal_can_rx.process_message(can_messages.rx_header.StdId,
-			can_messages.rx_data,
-			can_messages.rx_header.DLC);
 
 }
 

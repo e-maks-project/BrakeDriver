@@ -8,6 +8,19 @@
 #ifndef CURRENT_ACS_711_H_
 #define CURRENT_ACS_711_H_
 #include "adc.h"
+
+/*
+ * void calculate_current(void);
+ * oblicz pr¹d na podstawie ACS711
+ * i zapisuje dane w strutrze acs_data
+ *
+ * current_measurement* get_current_ptr(void);
+ * daje dostêpo do struktury acs_data
+ *
+ *
+ */
+
+
 /* for acs 711 KLC-25AB*/
 #define ACS_711_SENSITIVITY   55.0f // mV/A
 #define ACS_NOISE             8.0f  //mV/A

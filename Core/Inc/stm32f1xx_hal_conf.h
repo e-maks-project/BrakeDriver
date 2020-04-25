@@ -5,7 +5,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2019 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2020 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -49,18 +49,18 @@
   */
   
 #define HAL_MODULE_ENABLED  
-#define HAL_ADC_MODULE_ENABLED
+/*#define HAL_ADC_MODULE_ENABLED   */
 /*#define HAL_CRYP_MODULE_ENABLED   */
 #define HAL_CAN_MODULE_ENABLED
 /*#define HAL_CEC_MODULE_ENABLED   */
 /*#define HAL_CORTEX_MODULE_ENABLED   */
 /*#define HAL_CRC_MODULE_ENABLED   */
 /*#define HAL_DAC_MODULE_ENABLED   */
-#define HAL_DMA_MODULE_ENABLED
+/*#define HAL_DMA_MODULE_ENABLED   */
 /*#define HAL_ETH_MODULE_ENABLED   */
 /*#define HAL_FLASH_MODULE_ENABLED   */
 #define HAL_GPIO_MODULE_ENABLED
-#define HAL_I2C_MODULE_ENABLED
+/*#define HAL_I2C_MODULE_ENABLED   */
 /*#define HAL_I2S_MODULE_ENABLED   */
 /*#define HAL_IRDA_MODULE_ENABLED   */
 /*#define HAL_IWDG_MODULE_ENABLED   */
@@ -78,7 +78,7 @@
 /*#define HAL_SMARTCARD_MODULE_ENABLED   */
 /*#define HAL_SPI_MODULE_ENABLED   */
 /*#define HAL_SRAM_MODULE_ENABLED   */
-#define HAL_TIM_MODULE_ENABLED
+/*#define HAL_TIM_MODULE_ENABLED   */
 /*#define HAL_UART_MODULE_ENABLED   */
 /*#define HAL_USART_MODULE_ENABLED   */
 /*#define HAL_WWDG_MODULE_ENABLED   */

@@ -20,11 +20,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "adc.h"
 #include "can.h"
-#include "dma.h"
-#include "i2c.h"
-#include "tim.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -45,14 +41,11 @@
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
 extern  CAN_HandleTypeDef hcan;
-extern TIM_HandleTypeDef htim3;
-extern TIM_HandleTypeDef htim1;
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-uint32_t adc_raw_values[NUMBER_OF_ADC_CHANNLES];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -71,20 +64,11 @@ void hal_init(void){
 
 	//todo Lukas  add "start" functions if needed
 	MX_GPIO_Init();
-	MX_DMA_Init();
-	MX_ADC1_Init();
-	MX_I2C2_Init();
-	MX_TIM1_Init();
 	MX_CAN_Init();
 	MX_NVIC_Init();
 
 	// todo Lukas:  call HAL_Start... functions
-	HAL_ADC_Start_DMA(&hadc1,adc_raw_values, NUMBER_OF_ADC_CHANNLES);
-	HAL_TIM_Base_Start(&htim1);
-	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
-	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
 	HAL_CAN_Start(&hcan);
-	hal_can_filter_init();
 
 	if (HAL_CAN_ActivateNotification(&hcan, CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK)
 	{
@@ -108,7 +92,6 @@ void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
-  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
   /** Initializes the CPU, AHB and APB busses clocks 
   */
@@ -135,12 +118,6 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC;
-  PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV2;
-  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
-  {
-    Error_Handler();
-  }
 }
 
 /**
@@ -149,12 +126,6 @@ void SystemClock_Config(void)
   */
 static void MX_NVIC_Init(void)
 {
-  /* DMA1_Channel1_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA1_Channel1_IRQn, 3, 0);
-  HAL_NVIC_EnableIRQ(DMA1_Channel1_IRQn);
-  /* DMA1_Channel5_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA1_Channel5_IRQn, 2, 0);
-  HAL_NVIC_EnableIRQ(DMA1_Channel5_IRQn);
   /* USB_HP_CAN1_TX_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(USB_HP_CAN1_TX_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(USB_HP_CAN1_TX_IRQn);

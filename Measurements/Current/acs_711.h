@@ -7,7 +7,6 @@
 
 #ifndef CURRENT_ACS_711_H_
 #define CURRENT_ACS_711_H_
-#include "adc.h"
 
 /*
  * void calculate_current(void);

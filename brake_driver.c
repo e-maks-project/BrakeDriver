@@ -6,7 +6,6 @@
  */
 #include "brake_driver.h"
 #include "can_frames.h"
-extern TIM_HandleTypeDef htim3;
 
 int main(void){
  	hal_init();

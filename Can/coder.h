@@ -9,6 +9,7 @@
 #define CAN_CODER_H_
 #include <math.h>
 #include <malloc.h>
+#include "main.h"
 
 /*
  * float decode_uint16_to_floatu(uint8_t* data, uint8_t* data_length)
@@ -21,7 +22,6 @@
 
 
 /* type defines for ceedling tests*/
-#include "adc.h"
 
 typedef struct{
 	uint16_t bits;
